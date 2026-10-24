@@ -158,14 +158,14 @@
     .promise .actions { width: 100%; }
     .hero-art svg { max-width: 130px; }
   }
-  /* phone: thinner frames, more room for text */
+  /* phone: blocks run edge to edge, text gets the full width */
   @media (max-width: 520px) {
-    .hero { border-radius: 24px; padding: 26px 18px; margin-bottom: 64px; }
-    .pr { border-radius: 20px; padding: 12px; }
-    .pr-art { border-radius: 16px; padding: 16px; }
-    .facts { border-radius: 16px; padding: 4px 16px; }
-    .quote { border-radius: 18px; padding: 20px 18px; }
-    .tool { border-radius: 20px; padding: 22px 18px; }
+    .hero { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); border-radius: 0; padding: 28px 16px; margin-bottom: 56px; }
+    .pr { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); border-radius: 0; padding: 16px; }
+    .pr-art { border-radius: 12px; padding: 14px; }
+    .facts { border-radius: 12px; padding: 4px 14px; }
+    .quote { border-radius: 12px; padding: 18px 16px; }
+    .tool { border-radius: 14px; padding: 20px 16px; }
   }
 </style>
 </head>
@@ -244,7 +244,7 @@
           <h3>Малките стъпки показват голямата промяна</h3>
           <p>Като чертичките с молив на касата на вратата: растежът, който отблизо не се вижда, се появява, когато го отбелязваме редовно и по един и същ начин.</p>
           <p>Кратко четене веднъж седмично показва как се променят точността и темпото на детето.</p>
-          <a class="pr-link" href="practices/reading/">Стъпки и примери</a>
+          <a class="pr-link" href="practices/chertichki/">Стъпки и примери</a>
         </div>
         <dl class="facts">
           <div><dt>В час</dt><dd>Една минута седмично. Еднакви условия. Ясна картина на напредъка.</dd></div>
@@ -325,11 +325,11 @@
       <span class="pill wip">В разработка</span>
       <h3>Четене</h3>
       <p>Кратки тестове за четене и графика на напредъка.</p>
-      <a class="tool-link" href="practices/reading/#t-demo">Пробвайте ранната версия</a>
+      <a class="tool-link" href="practices/chertichki/#t-demo">Пробвайте ранната версия</a>
     </article>
     <article class="tool">
       <span class="pill">Скоро</span>
-      <h3>Едър текст</h3>
+      <h3>Текст</h3>
       <p>Адаптиране на текст при зрителни затруднения.</p>
     </article>
     <article class="tool">
@@ -352,7 +352,7 @@
       <p>Безплатно и без регистрация. Данните за децата никога не напускат вашето устройство.</p>
     </div>
     <div class="actions">
-      <a class="btn btn-primary" href="practices/reading/">Опитайте първата практика</a>
+      <a class="btn btn-primary" href="practices/chertichki/">Опитайте първата практика</a>
       <a class="btn btn-ghost" href="https://github.com/mresource">Вижте кода</a>
     </div>
   </div>
