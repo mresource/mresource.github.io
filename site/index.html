@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Безплатни инструменти за ресурсни учители: проследяване на напредъка, адаптиране на текст, игри. Без регистрация, данните остават на вашето устройство.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<style>body{margin:0;-webkit-text-size-adjust:100%}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>mresource</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+  /* Layout: soft sage garden; wide hero with a growing plant, practices and tools as rounded cards, a tinted promise band. */
+  :root {
+    --bg: #F4F7EF;
+    --surface: #FFFFFF;
+    --tint: #E4EEDC;
+    --tint-2: #DCE8D3;
+    --pale: #CFE0C4;
+    --mid: #A8C3A0;
+    --line: #3F6B4A;
+    --sun: #F7EBCF;
+    --ink: #2F4A3A;
+    --head: #24392D;
+    --muted: #4A5E50;
+    --accent: #3F6B4A;
+    --on-accent: #FFFFFF;
+    --display: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151F18; --surface: #1C2920; --tint: #233428; --tint-2: #2A3D30; --pale: #35503F; --mid: #6E9470;
+      --line: #A8CBA4; --sun: #4A4630; --ink: #DCE7DA; --head: #EEF4EC; --muted: #B3C5B4; --accent: #8DBF8F; --on-accent: #12201A;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151F18; --surface: #1C2920; --tint: #233428; --tint-2: #2A3D30; --pale: #35503F; --mid: #6E9470;
+    --line: #A8CBA4; --sun: #4A4630; --ink: #DCE7DA; --head: #EEF4EC; --muted: #B3C5B4; --accent: #8DBF8F; --on-accent: #12201A;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.65; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:hover { color: var(--head); }
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 999px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; color: var(--head); text-wrap: balance; margin: 0; }
+  .eyebrow { margin: 0; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .btn { display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; font-weight: 700; text-decoration: none; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { color: var(--on-accent); opacity: 0.92; }
+  .btn-ghost { border: 2px solid var(--mid); color: var(--accent); background: var(--surface); }
+  .badge { width: 48px; height: 48px; border-radius: 50%; background: var(--tint-2); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .ico { fill: none; stroke: var(--line); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--head); font-family: var(--display); font-weight: 700; font-size: 20px; }
+  nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 16px; font-weight: 600; }
+  nav a { text-decoration: none; padding-block: 10px; }
+
+  .hero { display: flex; flex-wrap: nowrap; align-items: center; gap: 24px 40px; margin-block: 8px 88px; background: var(--tint); border-radius: 36px; padding: clamp(28px, 5vw, 56px) clamp(24px, 5vw, 56px); overflow: hidden; }
+  .hero-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  .hero h1 { font-size: clamp(30px, 3.6vw, 46px); line-height: 1.15; letter-spacing: -0.01em; }
+  .lead { margin: 0; font-size: 19px; color: var(--muted); max-width: 46em; }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero-art { flex: 0 0 220px; min-width: 0; display: flex; justify-content: center; align-items: center; }
+  .hero-art svg { display: block; width: 100%; max-width: 220px; height: auto; }
+  @media (max-width: 640px) {
+    .hero { flex-wrap: wrap; }
+    .hero-art { flex-basis: 100%; justify-content: center; }
+    .hero-art svg { max-width: 160px; }
+  }
+
+  .band { background: var(--surface); }
+  .section { padding-block: 96px; display: flex; flex-direction: column; gap: 48px; }
+  .intro { display: flex; flex-direction: column; gap: 14px; max-width: 680px; }
+  .intro h2 { font-size: clamp(28px, 3.4vw, 42px); line-height: 1.2; }
+  .intro p { margin: 0; color: var(--muted); }
+
+  .pr-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pr-tab { font: inherit; font-size: 15px; font-weight: 700; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid var(--pale); background: var(--surface); color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+  .pr-tab span { font-variant-numeric: tabular-nums; color: var(--mid); display: inline-block; min-width: 1.4em; }
+  .pr-tab:hover { border-color: var(--mid); color: var(--head); }
+  .pr-tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .pr-tab[aria-selected="true"] span { color: var(--on-accent); opacity: 0.75; }
+  .pr-tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .pr { background: var(--bg); border-radius: 32px; padding: clamp(20px, 3vw, 40px); display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr) minmax(240px, 320px); gap: clamp(20px, 3vw, 44px); align-items: stretch; }
+  .pr-art { background: var(--tint); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; min-height: 100%; }
+  .pr-art svg { display: block; width: 100%; max-width: 260px; height: auto; margin: 0 auto; }
+  .pr-art p { margin: 0; font-size: 15px; font-weight: 700; color: var(--head); }
+  .pr-wrap { display: grid; }
+  .pr-wrap > .pr { grid-area: 1 / 1; }
+  .pr.off { visibility: hidden; }
+  .pr-text { display: flex; flex-direction: column; gap: 14px; justify-content: flex-start; min-width: 0; padding-top: 8px; }
+  .pr-text .eyebrow { font-size: 14px; }
+  .pr-text h3 { font-size: clamp(26px, 2.8vw, 38px); line-height: 1.15; letter-spacing: -0.01em; }
+  .pr-text p { margin: 0; font-size: 18px; color: var(--muted); max-width: 40em; }
+  .pr-text strong { color: var(--head); }
+  .pr-link { align-self: flex-start; font-weight: 700; font-size: 16px; padding: 10px 0; white-space: nowrap; }
+  .pr-link::after { content: " →"; }
+  .facts { margin: 0; padding: 8px 24px; border-radius: 24px; background: var(--surface); display: flex; flex-direction: column; justify-content: flex-start; align-self: start; }
+  .facts > div { padding: 16px 0; display: flex; flex-direction: column; gap: 4px; }
+  .facts > div + div { border-top: 1px solid var(--tint-2); }
+  .facts dt { font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .facts dd { margin: 0; font-size: 16px; color: var(--ink); }
+  @media (max-width: 1100px) {
+    .pr { grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); }
+    .facts { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: 0 28px; }
+    .facts > div { flex: 1 1 220px; }
+    .facts > div + div { border-top: 0; }
+  }
+  @media (max-width: 680px) {
+    .pr { grid-template-columns: minmax(0, 1fr); border-radius: 24px; }
+    .pr-art { flex-direction: row; align-items: center; padding: 16px; height: 128px; min-height: 0; }
+    .pr-art svg { width: 96px; flex: 0 0 96px; margin: 0; }
+    .facts { flex-direction: column; padding: 4px 20px; }
+    .facts > div { flex: none; }
+    .facts > div + div { border-top: 1px solid var(--tint-2); }
+    .pr-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pr-tab { justify-content: flex-start; padding: 0 14px; font-size: 14px; white-space: nowrap; gap: 8px; min-width: 0; }
+  }
+  .science { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center; padding-top: 16px; }
+  .science-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .science h2 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; }
+  .science-text p { margin: 0; color: var(--muted); max-width: 46em; }
+  .quote { flex: 1 1 300px; margin: 0; padding: 28px; border-radius: 24px; background: var(--tint); font-size: 21px; font-weight: 700; line-height: 1.45; color: var(--head); }
+
+  .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 24px; }
+  .tool { background: var(--surface); border: 1px solid var(--tint-2); border-radius: 28px; padding: 32px 28px; display: flex; flex-direction: column; gap: 12px; }
+  .tool h3 { font-size: 22px; }
+  .tool p { margin: 0; font-size: 16px; color: var(--muted); }
+  .pill { align-self: flex-start; font-size: 14px; font-weight: 700; padding: 6px 14px; border-radius: 999px; background: var(--sun); color: var(--head); }
+  .pill.wip { background: var(--tint); color: var(--accent); }
+  .tool-link { white-space: nowrap; margin-top: auto; padding-top: 6px; font-weight: 700; font-size: 16px; }
+  .tool-link::after { content: " →"; }
+
+  .promise { background: var(--tint); }
+  .promise .wrap { padding-block: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; }
+  .promise-text { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .promise h2 { font-size: clamp(26px, 3vw, 34px); line-height: 1.2; }
+  .promise p { margin: 0; font-size: 18px; color: var(--muted); max-width: 36em; }
+
+  footer { border-top: 1px solid var(--tint-2); }
+  footer .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; font-size: 15px; color: var(--muted); }
+  footer p { margin: 0; }
+  .sign { display: flex; align-items: center; gap: 8px; }
+  @media (max-width: 640px) {
+    nav { gap: 2px 18px; font-size: 15px; flex-wrap: nowrap; }
+    .nav-gh { display: none; }
+    nav a { padding-block: 8px; }
+  }
+  .btn { white-space: nowrap; justify-content: center; }
+  @media (max-width: 480px) {
+    .actions .btn { flex: 1 1 100%; }
+    .promise .actions { width: 100%; }
+    .hero-art svg { max-width: 130px; }
+  }
+  /* phone: thinner frames, more room for text */
+  @media (max-width: 520px) {
+    .hero { border-radius: 24px; padding: 26px 18px; margin-bottom: 64px; }
+    .pr { border-radius: 20px; padding: 12px; }
+    .pr-art { border-radius: 16px; padding: 16px; }
+    .facts { border-radius: 16px; padding: 4px 16px; }
+    .quote { border-radius: 18px; padding: 20px 18px; }
+    .tool { border-radius: 20px; padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="brand" href="#top">
+      <span class="badge">
+        <svg width="28" height="28" viewBox="0 0 48 48" aria-hidden="true" class="ico"><path d="M24 42V24"/><path d="M24 28c-7 0-11-4-11-11 7 0 11 4 11 11z"/><path d="M24 24c0-7 4-11 11-11 0 7-4 11-11 11z"/></svg>
+      </span>
+      mresource
+    </a>
+    <nav aria-label="Основна навигация">
+      <a href="#works">Какво работи</a>
+      <a href="#tools">Инструменти</a>
+      <a href="#promise">Поверителност</a>
+      <a class="nav-gh" href="https://github.com/mresource">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Всяко дете расте със своето темпо.</h1>
+        <p class="lead">Всяко дете учи и се развива по свой начин. mresource помага на ресурсните учители да планират подкрепата, да проследяват резултатите и да виждат промяната, дори когато тя се случва постепенно.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#tools">Разгледайте инструментите</a>
+          <a class="btn btn-ghost" href="#works">Какво работи</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="60 60 340 346" aria-hidden="true">
+          <circle cx="330" cy="110" r="38" fill="var(--sun)"/>
+          <path d="M60 360c40-14 90-20 160-20s120 6 160 20" fill="none" stroke="var(--pale)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M150 300h140l-16 92a14 14 0 0 1-14 12h-80a14 14 0 0 1-14-12z" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M140 288h160a6 6 0 0 1 6 6v6H134v-6a6 6 0 0 1 6-6z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M220 288c0-60-4-110 4-170" fill="none" stroke="var(--line)" stroke-width="4" stroke-linecap="round"/>
+          <path d="M220 240c-44 2-74-20-80-64 44-2 74 20 80 64z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M221 200c4-44 32-70 76-68-4 44-32 70-76 68z" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M222 150c-30-4-48-24-48-54 30 4 48 24 48 54z" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M224 118c2-26 18-42 44-42-2 26-18 42-44 42z" fill="var(--tint-2)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M176 182l20 14M254 160l-18 14M196 110l14 14M250 92l-12 12" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="96" cy="150" r="5" fill="var(--mid)"/>
+          <circle cx="360" cy="240" r="6" fill="var(--mid)"/>
+          <circle cx="120" cy="250" r="3.5" fill="var(--mid)"/>
+        </svg>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="band" id="works">
+  <div class="wrap section">
+    <div class="intro">
+      <p class="eyebrow">Подходи, които работят</p>
+      <h2>Четири принципа за по-добра подкрепа</h2>
+      <p>Как да разберем дали едно дете напредва? Как да преценим кога е време да променим подхода? И как да превърнем наблюденията в следващи стъпки?</p>
+    </div>
+
+    <div class="pr-tabs" role="tablist" aria-label="Принципи">
+      <button class="pr-tab" role="tab" id="tab-1" aria-controls="pr-1" aria-selected="true" type="button"><span>01</span>Малките стъпки</button>
+      <button class="pr-tab" role="tab" id="tab-2" aria-controls="pr-2" aria-selected="false" tabindex="-1" type="button"><span>02</span>Нов подход</button>
+      <button class="pr-tab" role="tab" id="tab-3" aria-controls="pr-3" aria-selected="false" tabindex="-1" type="button"><span>03</span>Процес</button>
+      <button class="pr-tab" role="tab" id="tab-4" aria-controls="pr-4" aria-selected="false" tabindex="-1" type="button"><span>04</span>Надграждане</button>
+    </div>
+
+    <div class="pr-wrap">
+      <article class="pr" id="pr-1" role="tabpanel" aria-labelledby="tab-1">
+        <div class="pr-art">
+          <svg viewBox="0 0 320 320" aria-hidden="true"><line x1="36" y1="296" x2="290" y2="296" stroke="var(--mid)" stroke-width="4" stroke-linecap="round"/><rect x="186" y="66" width="92" height="230" rx="4" fill="var(--pale)"/><circle cx="256" cy="186" r="7" fill="var(--line)"/><rect x="128" y="62" width="58" height="234" rx="6" fill="var(--surface)" stroke="var(--mid)" stroke-width="3"/><g stroke-linecap="round" stroke-width="4"><line x1="140" y1="200" x2="174" y2="200" stroke="var(--line)"/><line x1="140" y1="216" x2="174" y2="216" stroke="var(--line)" stroke-opacity="0.8"/><line x1="140" y1="232" x2="174" y2="232" stroke="var(--line)" stroke-opacity="0.6"/><line x1="140" y1="250" x2="174" y2="250" stroke="var(--line)" stroke-opacity="0.45"/><line x1="140" y1="266" x2="174" y2="266" stroke="var(--line)" stroke-opacity="0.3"/></g><path d="M78 262 l6 -22 l28 -46 l12 7 l-28 46 z" fill="var(--sun)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="118" cy="196" r="6" fill="var(--line)"/></svg>
+          <p>Всяка седмица една черта.</p>
+        </div>
+        <div class="pr-text">
+          <p class="eyebrow">Принцип 01 от 04</p>
+          <h3>Малките стъпки показват голямата промяна</h3>
+          <p>Като чертичките с молив на касата на вратата: растежът, който отблизо не се вижда, се появява, когато го отбелязваме редовно и по един и същ начин.</p>
+          <p>Кратко четене веднъж седмично показва как се променят точността и темпото на детето.</p>
+          <a class="pr-link" href="practices/chertichki/">Стъпки и примери</a>
+        </div>
+        <dl class="facts">
+          <div><dt>В час</dt><dd>Една минута седмично. Еднакви условия. Ясна картина на напредъка.</dd></div>
+          <div><dt>Научна основа</dt><dd>Измерване, основано на учебната програма (Curriculum-Based Measurement).</dd></div>
+          <div><dt>В mresource</dt><dd>„Четене“ провежда кратките проверки и показва резултатите в графика.</dd></div>
+        </dl>
+      </article>
+      <article class="pr off" id="pr-2" role="tabpanel" aria-labelledby="tab-2" aria-hidden="true" inert>
+        <div class="pr-art">
+          <svg viewBox="0 0 320 320" aria-hidden="true"><circle cx="262" cy="70" r="26" fill="var(--sun)"/><line x1="30" y1="296" x2="292" y2="296" stroke="var(--mid)" stroke-width="4" stroke-linecap="round"/><path d="M44 240h64l-8 56H52z" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M76 240v-30" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M76 222c-12 0-18-7-18-16 12 0 18 7 18 16z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M124 262h40" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M154 252l10 10-10 10" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M180 208h104l-12 88h-80z" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M232 208v-96" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M232 176c-22 0-34-14-32-34 22 0 32 14 32 34z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M232 150c0-22 12-34 34-34 2 22-12 34-34 34z" fill="var(--tint-2)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M232 124c-14 0-22-8-21-22 14 0 21 8 21 22z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p>Сменяме саксията, не растението.</p>
+        </div>
+        <div class="pr-text">
+          <p class="eyebrow">Принцип 02 от 04</p>
+          <h3>Когато няма напредък, променяме подхода</h3>
+          <p>Ако растението не расте, не се сърдим на растението, а сменяме светлината, водата или саксията.</p>
+          <p>Поставяме цел и следим резултатите спрямо нея. Ако <strong>четири поредни измервания</strong> са под целевата линия, преразглеждаме подхода, вместо да повтаряме същото.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>В час</dt><dd>Решенията се основават на натрупаните наблюдения, а не на впечатленията от един отделен ден.</dd></div>
+          <div><dt>Научна основа</dt><dd>Индивидуализиране на подкрепата въз основа на данни (Data-Based Individualization).</dd></div>
+          <div><dt>В mresource</dt><dd>Графиката показва кога е време за промяна.</dd></div>
+        </dl>
+      </article>
+      <article class="pr off" id="pr-3" role="tabpanel" aria-labelledby="tab-3" aria-hidden="true" inert>
+        <div class="pr-art">
+          <svg viewBox="0 0 320 320" aria-hidden="true"><circle cx="160" cy="176" r="112" fill="none" stroke="var(--mid)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/><path d="M262 132l10 18 14-14" fill="none" stroke="var(--mid)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="40" y="66" width="62" height="42" rx="10" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M52 66c0-18 38-18 38 0" fill="none" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M102 80l30-20" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><g fill="var(--line)"><ellipse cx="140" cy="76" rx="3" ry="5"/><ellipse cx="148" cy="92" rx="3" ry="5"/><ellipse cx="138" cy="104" rx="3" ry="5"/></g><line x1="96" y1="272" x2="224" y2="272" stroke="var(--mid)" stroke-width="4" stroke-linecap="round"/><path d="M130 220h60l-7 52h-46z" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M160 220v-58" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M160 198c-16 0-24-10-23-24 16 0 23 10 23 24z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M160 180c0-16 10-24 24-24 1 16-10 24-24 24z" fill="var(--tint-2)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p>Гледаме, садим, поливаме, гледаме пак.</p>
+        </div>
+        <div class="pr-text">
+          <p class="eyebrow">Принцип 03 от 04</p>
+          <h3>Подкрепата е процес, не еднократен план</h3>
+          <p>Градинарят не засажда и забравя: гледа, засажда, полива и пак поглежда.</p>
+          <p><strong>Оценяваме, планираме, прилагаме и преглеждаме</strong> резултатите. Наученото определя следващата стъпка.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>В час</dt><dd>Записвайте какво променяте и проследявайте как това се отразява на резултатите.</dd></div>
+          <div><dt>Научна основа</dt><dd>Цикълът „Оцени, планирай, приложи, прегледай“ в насоките на Education Endowment Foundation (EEF).</dd></div>
+          <div><dt>В mresource</dt><dd>Смяната на подхода се отбелязва на графиката, за да се види какво е последвало.</dd></div>
+        </dl>
+      </article>
+      <article class="pr off" id="pr-4" role="tabpanel" aria-labelledby="tab-4" aria-hidden="true" inert>
+        <div class="pr-art">
+          <svg viewBox="0 0 320 320" aria-hidden="true"><circle cx="160" cy="76" r="30" fill="var(--sun)"/><g stroke="var(--sun)" stroke-width="5" stroke-linecap="round"><line x1="160" y1="26" x2="160" y2="34"/><line x1="110" y1="76" x2="118" y2="76"/><line x1="202" y1="76" x2="210" y2="76"/><line x1="124" y1="40" x2="130" y2="46"/><line x1="196" y1="40" x2="190" y2="46"/></g><line x1="30" y1="296" x2="290" y2="296" stroke="var(--mid)" stroke-width="4" stroke-linecap="round"/><path d="M80 296v-58" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M80 262c-14 0-22-9-21-22 14 0 21 9 21 22z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 250c0-14 9-22 22-22 1 14-9 22-22 22z" fill="var(--tint-2)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M160 296v-86" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M160 256c-16 0-24-10-23-24 16 0 23 10 23 24z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M160 236c0-16 10-24 24-24 1 16-10 24-24 24z" fill="var(--tint-2)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M240 296v-50" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M240 270c-12 0-19-8-18-19 12 0 18 8 18 19z" fill="var(--mid)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M240 196c0 0-12 16-12 24a12 12 0 0 0 24 0c0-8-12-24-12-24z" fill="var(--pale)" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p>Слънце за всички, вода за който има нужда.</p>
+        </div>
+        <div class="pr-text">
+          <p class="eyebrow">Принцип 04 от 04</p>
+          <h3>Допълнителната подкрепа надгражда ученето в клас</h3>
+          <p>Цялата градина има нужда от слънце, а някои растения и от повече вода.</p>
+          <p>Всяко дете има нужда от <strong>качествено преподаване</strong>. Индивидуалните занимания и работата в малка група го допълват и са свързани с материала на класа.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>В час</dt><dd>Свързвайте индивидуалните задачи с темите, по които работи целият клас.</dd></div>
+          <div><dt>Научна основа</dt><dd>Насоките на EEF за ученици със специални образователни потребности.</dd></div>
+          <div><dt>В mresource</dt><dd>Адаптираните текстове и игрите стъпват на учебното съдържание на класа.</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="science">
+      <div class="science-text">
+        <h2>Доказани принципи. Индивидуален напредък.</h2>
+        <p>mresource стъпва върху изследвания и практики, прилагани в чужбина, и ги адаптира за работата на българските ресурсни учители. За тези измервания още няма български норми. Затова инструментите следят развитието на самото дете във времето, а не го сравняват с други деца.</p>
+      </div>
+      <p class="quote">Не търсим мястото на детето спрямо останалите. Търсим следващата стъпка в неговото развитие.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap section" id="tools">
+  <div class="intro">
+    <p class="eyebrow">Инструменти</p>
+    <h2>Малки помощници за ресурсния кабинет</h2>
+  </div>
+  <div class="tools">
+    <article class="tool">
+      <span class="pill wip">В разработка</span>
+      <h3>Четене</h3>
+      <p>Кратки тестове за четене и графика на напредъка.</p>
+      <a class="tool-link" href="practices/chertichki/#t-demo">Пробвайте ранната версия</a>
+    </article>
+    <article class="tool">
+      <span class="pill">Скоро</span>
+      <h3>Едър текст</h3>
+      <p>Адаптиране на текст при зрителни затруднения.</p>
+    </article>
+    <article class="tool">
+      <span class="pill">Скоро</span>
+      <h3>Математика</h3>
+      <p>Тестове за бързина при смятане.</p>
+    </article>
+    <article class="tool">
+      <span class="pill">Скоро</span>
+      <h3>Игри</h3>
+      <p>Игри със срички и думи за децата, в час или вкъщи.</p>
+    </article>
+  </div>
+</div>
+
+<section class="promise" id="promise" aria-labelledby="promise-title">
+  <div class="wrap">
+    <div class="promise-text">
+      <h2 id="promise-title">Направете напредъка видим.</h2>
+      <p>Безплатно и без регистрация. Данните за децата никога не напускат вашето устройство.</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="practices/chertichki/">Опитайте първата практика</a>
+      <a class="btn btn-ghost" href="https://github.com/mresource">Вижте кода</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Прави ги <a href="https://mpangarova.github.io/">Мария Пангарова</a>. Инструментите не са диагностични и не заменят професионалната оценка.</p>
+    <span class="sign">
+      <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" class="ico"><path d="M24 42V24"/><path d="M24 28c-7 0-11-4-11-11 7 0 11 4 11 11z"/><path d="M24 24c0-7 4-11 11-11 0 7-4 11-11 11z"/></svg>
+      © 2026 mresource
+    </span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.pr-tab'));
+  function show(i, focus) {
+    tabs.forEach(function (t, j) {
+      var on = j === i;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      panel.classList.toggle('off', !on);
+      if (on) { panel.removeAttribute('aria-hidden'); panel.inert = false; } else { panel.setAttribute('aria-hidden', 'true'); panel.inert = true; }
+    });
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { show(i, false); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show((i + 1) % tabs.length, true); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show((i + tabs.length - 1) % tabs.length, true); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

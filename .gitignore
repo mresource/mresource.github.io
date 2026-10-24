@@ -1,0 +1,4 @@
+# built by GitHub Actions, not committed
+site/assets/progress.wasm
+site/assets/wasm_exec.js
+.DS_Store
