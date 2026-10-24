@@ -9,7 +9,7 @@ Free and with no sign-up. Data about the children never leaves the teacher's dev
 ```
 site/                         the static site (GitHub Pages)
   index.html                  home page
-  practices/chertichki/       practice: one-minute reading and the four-point rule
+  practices/reading/          practice: one-minute reading and the four-point rule
   assets/logo.svg
 go/                           the logic, in Go
   progress/                   aim line and the four-point rule, with tests

@@ -112,7 +112,18 @@
   .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .err { font-size: 14px; color: var(--sun-ink); background: var(--sun); padding: 4px 10px; border-radius: 8px; }
 
-  .tx-bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+  .tx-bar { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: flex-start; justify-content: space-between; }
+  .tx-group { display: flex; flex-direction: column; gap: 8px; }
+  .tx-lbl { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .seg.seg-track { gap: 0; padding: 4px; border-radius: 999px; background: var(--tint); flex-wrap: nowrap; }
+  .seg.seg-track button { border: 0; background: transparent; min-height: 38px; }
+  .seg.seg-track button[aria-pressed="true"] { background: var(--surface); color: var(--head); box-shadow: 0 1px 3px rgba(36,57,45,.18); }
+  @media (max-width: 640px) {
+    .tx-bar { flex-direction: column; align-items: stretch; gap: 0; }
+    .tx-group-view { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--tint-2); }
+    .seg.seg-track { display: flex; }
+    .seg.seg-track button { flex: 1 1 0; }
+  }
   .seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
   .seg button { font: inherit; font-size: 15px; font-weight: 700; min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--pale); background: var(--surface); color: var(--muted); cursor: pointer; }
   .seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
@@ -137,10 +148,6 @@
   .list li::marker { color: var(--mid); }
   .src { margin-top: 14px; font-size: 15px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
 
-  .tool { background: var(--accent); color: var(--on-accent); border-radius: 28px; padding: clamp(22px, 4vw, 36px); display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
-  .tool h2 { color: var(--on-accent); font-size: 24px; }
-  .tool p { max-width: 40em; opacity: 0.92; }
-  .tool .pill { font-size: 14px; font-weight: 700; padding: 6px 14px; border-radius: 999px; background: var(--on-accent); color: var(--accent); }
 
   footer { border-top: 1px solid var(--tint-2); margin-top: 72px; }
   footer .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; font-size: 15px; color: var(--muted); }
@@ -155,8 +162,7 @@
     .head { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); border-radius: 0; padding: 28px 16px; margin-bottom: 32px; }
     .panel { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); border-radius: 0; padding: 22px 16px; }
     .tldr div { border-radius: 12px; padding: 16px; }
-    .tool { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); border-radius: 0; padding: 24px 16px; }
-    .steps li label { padding: 10px 0; gap: 12px; }
+      .steps li label { padding: 10px 0; gap: 12px; }
     .reader { padding: 0; border: 0; background: none; border-radius: 0; }
     .reader-screen { border: 1px solid #DADAD7; border-radius: 8px; padding: 18px 14px 14px; }
   }
@@ -220,11 +226,13 @@
     <p class="sub">Три текста за 3. клас, написани за mresource и изравнени по брой думи и срички. Използвайте копието за детето при четенето, а копието за учителя, за да броите бързо: числото вдясно е колко думи са прочетени до края на реда.</p>
     <div class="panel" style="display:flex;flex-direction:column;gap:20px">
       <div class="tx-bar">
-        <div class="seg" id="tx-pick" role="group" aria-label="Текст"></div>
-        <div class="seg" id="tx-view" role="group" aria-label="Копие">
-          <button type="button" data-v="child" aria-pressed="true">За детето</button>
-          <button type="button" data-v="teacher" aria-pressed="false">За учителя</button>
-        </div>
+        <div class="tx-group"><span class="tx-lbl" id="tx-pick-l">Текст</span>
+          <div class="seg" id="tx-pick" role="group" aria-labelledby="tx-pick-l"></div></div>
+        <div class="tx-group tx-group-view"><span class="tx-lbl" id="tx-view-l">Копие</span>
+          <div class="seg seg-track" id="tx-view" role="group" aria-labelledby="tx-view-l">
+            <button type="button" data-v="child" aria-pressed="true">За детето</button>
+            <button type="button" data-v="teacher" aria-pressed="false">За учителя</button>
+          </div></div>
       </div>
       <p class="tx-meta" id="tx-meta"></p>
       <div class="reader">
@@ -312,14 +320,6 @@
         </ul>
       </div>
     </div>
-  </section>
-
-  <section class="tool" aria-labelledby="t-tool">
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <h2 id="t-tool">В mresource: „Четене“</h2>
-      <p>Ще подготвя текстовете с еднаква трудност по срички, ще засича минутата и ще чертае графиката. Данните остават на вашето устройство.</p>
-    </div>
-    <span class="pill">В разработка</span>
   </section>
 </div>
 
