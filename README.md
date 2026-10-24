@@ -1,33 +1,33 @@
 # mresource
 
-Безплатни инструменти за ресурсни учители. Сайт: https://mresource.github.io/
+Free tools for resource teachers in Bulgarian schools. Site: https://mresource.github.io/
 
-Безплатно и без регистрация. Данните за децата никога не напускат устройството на учителя. Инструментите не са диагностични и не заменят професионалната оценка.
+Free and with no sign-up. Data about the children never leaves the teacher's device. The tools are not diagnostic and do not replace a professional assessment.
 
-## Структура
+## Structure
 
 ```
-site/                         статичният сайт (GitHub Pages)
-  index.html                  начална страница
-  practices/chertichki/       практика: едноминутно четене и правилото с четирите точки
+site/                         the static site (GitHub Pages)
+  index.html                  home page
+  practices/chertichki/       practice: one-minute reading and the four-point rule
   assets/logo.svg
-go/                           логиката, на Go
-  progress/                   целева линия и правилото с четирите точки, с тестове
-  cmd/wasm/                   мост към браузъра (WebAssembly)
-.github/workflows/pages.yml   тестове → WebAssembly → публикуване
+go/                           the logic, in Go
+  progress/                   aim line and the four-point rule, with tests
+  cmd/wasm/                   bridge to the browser (WebAssembly)
+.github/workflows/pages.yml   tests → WebAssembly → publish
 ```
 
-## Как работи публикуването
+## How publishing works
 
-При всеки push в `main` GitHub Actions:
+On every push to `main`, GitHub Actions:
 
-1. проверява форматирането и пуска `go test ./...`;
-2. компилира `go/cmd/wasm` до `site/assets/progress.wasm`;
-3. публикува `site/` на GitHub Pages.
+1. checks formatting, then runs `go vet ./...` and `go test ./...`;
+2. compiles `go/cmd/wasm` to `site/assets/progress.wasm`;
+3. publishes `site/` to GitHub Pages.
 
-Ако тестовете не минат, сайтът остава на последната работеща версия.
+If the tests fail, the site stays on the last working version.
 
-## Локално
+## Running locally
 
 ```
 cd go
@@ -37,8 +37,8 @@ cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" ../site/assets/
 cd ../site && python3 -m http.server 8000
 ```
 
-После отвори http://localhost:8000.
+Then open http://localhost:8000.
 
 ---
 
-Прави го [Мария Пангарова](https://mpangarova.github.io/).
+mpangarova](https://mpangarova.github.io/).
