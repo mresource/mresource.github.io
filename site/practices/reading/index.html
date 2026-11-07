@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Как да разберете дали подкрепата помага, преди да мине срокът: една минута четене на седмица, целева линия и правилото с четирите точки.">
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
-<style>body{margin:0;-webkit-text-size-adjust:100%}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>body{margin:0;-webkit-text-size-adjust:100%}img{max-width:100%}[hidden]{display:none!important}  .chip-link { text-decoration: none; background: var(--accent); color: var(--on-accent); }
+  .chip-link:hover { color: var(--on-accent); opacity: .9; }
+</style>
 <title>Чертичките на касата · mresource</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -166,6 +168,9 @@
     .reader { padding: 0; border: 0; background: none; border-radius: 0; }
     .reader-screen { border: 1px solid #DADAD7; border-radius: 8px; padding: 18px 14px 14px; }
   }
+  .next { text-decoration: none; font-weight: 700; white-space: nowrap; }
+  .next::after { content: " →"; }
+  @media (max-width: 520px) { .next { white-space: normal; } }
 </style>
 <script src="../../assets/wasm_exec.js"></script>
 </head>
@@ -178,8 +183,8 @@
       mresource
     </a>
     <nav aria-label="Основна навигация">
-      <a href="../../#works">Какво работи</a>
-      <a href="../../#tools">Инструменти</a>
+      <a href="../../#works">Принципи</a>
+      <a href="../../#tools">Помощници</a>
       <a href="../../#promise">Поверителност</a>
       <a class="nav-gh" href="https://github.com/mresource">GitHub</a>
     </nav>
@@ -326,7 +331,7 @@
 <footer>
   <div class="wrap">
     <span>© 2026 mresource · Помощен инструмент за учители.</span>
-    <span>Следваща практика: Ако не расте, сменете саксията</span>
+    <a class="next" href="../change/">Следваща практика: Сменяме саксията</a>
   </div>
 </footer>
 

@@ -136,6 +136,10 @@
   .pill.wip { background: var(--tint); color: var(--accent); }
   .tool-link { white-space: nowrap; margin-top: auto; padding-top: 6px; font-weight: 700; font-size: 16px; }
   .tool-link::after { content: " →"; }
+  .tool-area { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .tool-pr { font-size: 14px; font-weight: 700; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .tool-pr a { text-decoration: none; }
+  .tool-pr a::before { content: "↳ "; color: var(--mid); }
 
   .promise { background: var(--tint); }
   .promise .wrap { padding-block: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; }
@@ -180,8 +184,8 @@
       mresource
     </a>
     <nav aria-label="Основна навигация">
-      <a href="#works">Какво работи</a>
-      <a href="#tools">Инструменти</a>
+      <a href="#works">Принципи</a>
+      <a href="#tools">Помощници</a>
       <a href="#promise">Поверителност</a>
       <a class="nav-gh" href="https://github.com/mresource">GitHub</a>
     </nav>
@@ -193,8 +197,8 @@
         <h1>Всяко дете расте със своето темпо.</h1>
         <p class="lead">Всяко дете учи и се развива по свой начин. mresource помага на ресурсните учители да планират подкрепата, да проследяват резултатите и да виждат промяната, дори когато тя се случва постепенно.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="#tools">Разгледайте инструментите</a>
-          <a class="btn btn-ghost" href="#works">Какво работи</a>
+          <a class="btn btn-primary" href="#tools">Разгледайте помощниците</a>
+          <a class="btn btn-ghost" href="#works">Принципи</a>
         </div>
       </div>
       <div class="hero-art">
@@ -249,7 +253,7 @@
         <dl class="facts">
           <div><dt>В час</dt><dd>Една минута седмично. Еднакви условия. Ясна картина на напредъка.</dd></div>
           <div><dt>Научна основа</dt><dd>Измерване, основано на учебната програма (Curriculum-Based Measurement).</dd></div>
-          <div><dt>В mresource</dt><dd>„Четене“ провежда кратките проверки и показва резултатите в графика.</dd></div>
+          <div><dt>В mresource</dt><dd>Практиката има готови текстове и графика, в която отбелязвате всяка седмица.</dd></div>
         </dl>
       </article>
       <article class="pr off" id="pr-2" role="tabpanel" aria-labelledby="tab-2" aria-hidden="true" inert>
@@ -262,11 +266,12 @@
           <h3>Когато няма напредък, променяме подхода</h3>
           <p>Ако растението не расте, не се сърдим на растението, а сменяме светлината, водата или саксията.</p>
           <p>Поставяме цел и следим резултатите спрямо нея. Ако <strong>четири поредни измервания</strong> са под целевата линия, преразглеждаме подхода, вместо да повтаряме същото.</p>
+          <a class="pr-link" href="practices/change/">Стъпки и примери</a>
         </div>
         <dl class="facts">
           <div><dt>В час</dt><dd>Решенията се основават на натрупаните наблюдения, а не на впечатленията от един отделен ден.</dd></div>
           <div><dt>Научна основа</dt><dd>Индивидуализиране на подкрепата въз основа на данни (Data-Based Individualization).</dd></div>
-          <div><dt>В mresource</dt><dd>Графиката показва кога е време за промяна.</dd></div>
+          <div><dt>В mresource</dt><dd>Графиката показва кога е време за промяна. <a href="tools/cards/">Карти</a>, <a href="tools/games/">Игри</a> и <a href="tools/math/">Математика</a> дават готови нови подходи.</dd></div>
         </dl>
       </article>
       <article class="pr off" id="pr-3" role="tabpanel" aria-labelledby="tab-3" aria-hidden="true" inert>
@@ -279,6 +284,7 @@
           <h3>Подкрепата е процес, не еднократен план</h3>
           <p>Градинарят не засажда и забравя: гледа, засажда, полива и пак поглежда.</p>
           <p><strong>Оценяваме, планираме, прилагаме и преглеждаме</strong> резултатите. Наученото определя следващата стъпка.</p>
+          <a class="pr-link" href="practices/cycle/">Стъпки и примери</a>
         </div>
         <dl class="facts">
           <div><dt>В час</dt><dd>Записвайте какво променяте и проследявайте как това се отразява на резултатите.</dd></div>
@@ -296,11 +302,12 @@
           <h3>Допълнителната подкрепа надгражда ученето в клас</h3>
           <p>Цялата градина има нужда от слънце, а някои растения и от повече вода.</p>
           <p>Всяко дете има нужда от <strong>качествено преподаване</strong>. Индивидуалните занимания и работата в малка група го допълват и са свързани с материала на класа.</p>
+          <a class="pr-link" href="practices/classroom/">Стъпки и примери</a>
         </div>
         <dl class="facts">
           <div><dt>В час</dt><dd>Свързвайте индивидуалните задачи с темите, по които работи целият клас.</dd></div>
           <div><dt>Научна основа</dt><dd>Насоките на EEF за ученици със специални образователни потребности.</dd></div>
-          <div><dt>В mresource</dt><dd>Адаптираните текстове и игрите стъпват на учебното съдържание на класа.</dd></div>
+          <div><dt>В mresource</dt><dd><a href="tools/text/">Текст</a> подготвя текста от урока, така че детето да чете заедно с класа.</dd></div>
         </dl>
       </article>
     </div>
@@ -317,30 +324,33 @@
 
 <div class="wrap section" id="tools">
   <div class="intro">
-    <p class="eyebrow">Инструменти</p>
+    <p class="eyebrow">Помощници</p>
     <h2>Малки помощници за ресурсния кабинет</h2>
   </div>
   <div class="tools">
     <article class="tool">
-      <span class="pill wip">В разработка</span>
-      <h3>Четене</h3>
-      <p>Кратки тестове за четене и графика на напредъка.</p>
-      <a class="tool-link" href="practices/reading/#t-demo">Пробвайте ранната версия</a>
+      <p class="tool-area">Думи и задачи</p>
+      <h3>Карти</h3>
+      <p>Една нова дума или задача сред девет познати. Детето успява почти винаги, а новото се запомня.</p>
+      <a class="tool-link" href="tools/cards/">Отворете Карти</a>
     </article>
     <article class="tool">
-      <span class="pill">Скоро</span>
+      <p class="tool-area">Достъп до текста</p>
       <h3>Текст</h3>
-      <p>Адаптиране на текст при зрителни затруднения.</p>
+      <p>Намира размера на шрифта, при който детето чете най-бързо, и подготвя текста от урока за печат.</p>
+      <a class="tool-link" href="tools/text/">Отворете Текст</a>
     </article>
     <article class="tool">
-      <span class="pill">Скоро</span>
+      <p class="tool-area">Усет за числата</p>
       <h3>Математика</h3>
-      <p>Тестове за бързина при смятане.</p>
+      <p>Игра на дъска с числа, която подобрява усета за числата, и проверка преди и след.</p>
+      <a class="tool-link" href="tools/math/">Изиграйте една игра</a>
     </article>
     <article class="tool">
-      <span class="pill">Скоро</span>
+      <p class="tool-area">Четене</p>
       <h3>Игри</h3>
-      <p>Игри със срички и думи за децата, в час или вкъщи.</p>
+      <p>„Прочети го пак“: детето чете един откъс три пъти и вижда как расте лентата му.</p>
+      <a class="tool-link" href="tools/games/">Отворете Игри</a>
     </article>
   </div>
 </div>
