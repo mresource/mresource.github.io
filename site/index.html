@@ -107,7 +107,7 @@
   .facts dt { font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
   .facts dd { margin: 0; font-size: 16px; color: var(--ink); }
   @media (max-width: 1100px) {
-    .pr { grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); }
+    .pr { grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); align-content: start; }
     .facts { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: 0 28px; }
     .facts > div { flex: 1 1 220px; }
     .facts > div + div { border-top: 0; }
@@ -171,6 +171,8 @@
     .quote { border-radius: 18px; padding: 20px 18px; }
     .tool { border-radius: 20px; padding: 22px 18px; }
   }
+  /* phone: name and copyright on one line */
+  @media (max-width: 520px) { footer .wrap { font-size: 14px; gap: 8px 12px; } }
 </style>
 </head>
 <body>
@@ -347,9 +349,9 @@
       <a class="tool-link" href="tools/math/">Изиграйте една игра</a>
     </article>
     <article class="tool">
-      <p class="tool-area">Четене</p>
+      <p class="tool-area">Срички и думи</p>
       <h3>Игри</h3>
-      <p>„Прочети го пак“: детето чете един откъс три пъти и вижда как расте лентата му.</p>
+      <p>Три игри със срички: сглоби думата, колко срички, мемори. Върху думите, които детето учи.</p>
       <a class="tool-link" href="tools/games/">Отворете Игри</a>
     </article>
   </div>
@@ -359,7 +361,7 @@
   <div class="wrap">
     <div class="promise-text">
       <h2 id="promise-title">Направете напредъка видим.</h2>
-      <p>Безплатно и без регистрация. Данните за децата никога не напускат вашето устройство.</p>
+      <p>Безплатно и без регистрация. Данните за децата не напускат вашето устройство. Инструментите не заменят професионалната оценка.</p>
     </div>
     <div class="actions">
       <a class="btn btn-primary" href="practices/reading/">Опитайте първата практика</a>
@@ -370,7 +372,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Прави ги <a href="https://mpangarova.github.io/">Мария Пангарова</a>. Инструментите не са диагностични и не заменят професионалната оценка.</p>
+    <p>Проект на <a href="https://mpangarova.github.io/">Мария Пангарова</a></p>
     <span class="sign">
       <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" class="ico"><path d="M24 42V24"/><path d="M24 28c-7 0-11-4-11-11 7 0 11 4 11 11z"/><path d="M24 24c0-7 4-11 11-11 0 7-4 11-11 11z"/></svg>
       © 2026 mresource
